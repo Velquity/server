@@ -1,4 +1,4 @@
-import { User } from '../../model/index.js'
+import { User } from '../../model/base/index.js'
 
 const getAllUsers = async (req, res) => {
     const users = await User.findAll()

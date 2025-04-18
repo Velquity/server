@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
-import sequelize from '../config/dbConn.js'
-import paymentStatus from '../config/enum/paymentStatus.js'
+import sequelize from '../../config/dbConn.js'
+import paymentStatus from '../../config/enum/paymentStatus.js'
 
 const Payment = sequelize.define('payment', {
     amount: {

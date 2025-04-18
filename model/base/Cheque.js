@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
-import sequelize from '../config/dbConn.js'
-import chequeStatus from "../config/enum/chequeStatus.js"
+import sequelize from '../../config/dbConn.js'
+import chequeStatus from "../../config/enum/chequeStatus.js"
 
 const Cheque = sequelize.define('Cheque', {
     insta: {

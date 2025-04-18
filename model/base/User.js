@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
-import sequelize from '../config/dbConn.js'
-import ROLES_LIST from '../config/roles_list.js'
+import sequelize from '../../config/dbConn.js'
+import ROLES_LIST from '../../config/roles_list.js'
 
 const User = sequelize.define('User', {
     username: {

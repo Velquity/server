@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
-import sequelize from '../config/dbConn.js'
-import purchaseStatus from '../config/enum/purchaseStatus.js'
+import sequelize from '../../config/dbConn.js'
+import purchaseStatus from '../../config/enum/purchaseStatus.js'
 
 const Purchase = sequelize.define('Purchase', {
     companyId: {

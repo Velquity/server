@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
-import sequelize from '../config/dbConn.js'
-import productCategory from '../config/enum/productCategory.js'
-import productSubCategory from '../config/enum/productSubCategory.js'
+import sequelize from '../../config/dbConn.js'
+import productCategory from '../../config/enum/productCategory.js'
+import productSubCategory from '../../config/enum/productSubCategory.js'
 
 const Product = sequelize.define('Product', {
     name: {

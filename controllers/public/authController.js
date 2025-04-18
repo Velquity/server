@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import {User, RefreshToken} from '../../model/index.js'
+import {User, RefreshToken} from '../../model/base/index.js'
 
 const handleLogin = async (req, res) => {
     const cookies = req.cookies

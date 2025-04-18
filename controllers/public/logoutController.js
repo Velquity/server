@@ -1,4 +1,4 @@
-import { RefreshToken } from '../../model/index.js'
+import { RefreshToken } from '../../model/base/index.js'
 
 const handleLogout = async (req, res) => {
     const cookies = req.cookies
