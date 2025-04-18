@@ -11,10 +11,6 @@ const Purchase = sequelize.define('Purchase', {
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    orderId: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
     creditDays: {
         type: DataTypes.INTEGER,
         allowNull: false
