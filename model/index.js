@@ -19,7 +19,12 @@ import ReturnInventory from "./inventory/ReturnInventory.js"
 import SecondaryInventory from "./inventory/SecondaryInventory.js"
 
 // Imports: mapping models
-
+import Order_Product from "./mappings/Order_Product.js"
+import Order_Purchase from "./mappings/Order_Purchase.js"
+import Payment_Cheque from "./mappings/Payment_Cheque.js"
+import Payment_Purchase from "./mappings/Payment_Purchase.js"
+import Product_Price from "./mappings/Product_Price.js"
+import Purchase_Product from "./mappings/Purchase_Product.js"
 
 
 // *._.*._.*._.*._.* Table Associations *._.*._.*._.*._.* \\
@@ -84,10 +89,33 @@ User.hasMany(RefreshToken, { foreignKey: 'userId', as: 'refreshTokens', onDelete
 
 // *._.*._.*._.*._.* Mapping Associations *._.*._.*._.*._.* \\
 
+// Order_Product Associations
+
+
+// Order_Purchase Associations
+
+
+// Payment_Cheque Associations
+
+
+// Payment_Purchase Associations
+
+
+// Product_Price Associations
+
+
+// Purchase_Product Associations
+
 
 
 // Export models
 export {
+    // base models
     Cheque, Client, Order, Payment, Product, Purchase, RefreshToken, User,
-    BonusInventory, BrokenInventory, ExpireInventory, PrimaryInventory, RefundInventory, ReturnInventory, SecondaryInventory
+
+    // inventory models
+    BonusInventory, BrokenInventory, ExpireInventory, PrimaryInventory, RefundInventory, ReturnInventory, SecondaryInventory,
+
+    // mapping models
+    Order_Product, Order_Purchase, Payment_Cheque, Payment_Purchase, Product_Price, Purchase_Product,
 }

@@ -1,12 +1,16 @@
 import { DataTypes } from 'sequelize'
 import sequelize from '../../config/dbConn.js'
 
-const Order_Purchase = sequelize.define('order_purchase', {
-    orderId: {
+const Product_Price = sequelize.define('product_price', {
+    productId: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    purchaseId: {
+    wholeSalePrice: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    retailPrice: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
@@ -15,6 +19,6 @@ const Order_Purchase = sequelize.define('order_purchase', {
         allowNull: false,
         default: true
     }
-}, { timestamps: true })
+})
 
-export default Order_Purchase
+export default Product_Price
