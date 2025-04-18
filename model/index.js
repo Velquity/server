@@ -33,6 +33,14 @@ import Purchase_Product from "./mappings/Purchase_Product.js"
 Cheque.belongsTo(Company, { foreignKey: 'companyId', as: 'company' })
 Cheque.hasOne(Payment_Cheque, { foreignKey: 'chequeId', as: 'payment_cheque' })
 
+Cheque.belongsToMany(Payment, {
+    through: Payment_Cheque,
+    foreignKey: 'chequeId',
+    otherKey: 'paymentId',
+    as: 'payments'
+})
+
+
 // Client Associations
 
 // Company Associations
@@ -47,9 +55,37 @@ Order.belongsTo(Company, { foreignKey: 'companyId', as: 'company' })
 Order.hasMany(Order_Product, { foreignKey: 'orderId', as: 'order_products' })
 Order.hasMany(Order_Purchase, { foreignKey: 'orderId', as: 'order_purchases' })
 
+Order.belongsToMany(Product, {
+    through: Order_Product,
+    foreignKey: 'orderId',
+    otherKey: 'productId',
+    as: 'products'
+})
+Order.belongsToMany(Purchase, {
+    through: Order_Purchase,
+    foreignKey: 'orderId',
+    otherKey: 'purchaseId',
+    as: 'purchases'
+})
+
+
 // Payment Associations
 Payment.hasMany(Payment_Cheque, { foreignKey: 'paymentId', as: 'payment_cheques' })
 Payment.hasMany(Payment_Purchase, { foreignKey: 'paymentId', as: 'payment_purchases' })
+
+Payment.belongsToMany(Cheque, {
+    through: Payment_Cheque,
+    foreignKey: 'paymentId',
+    otherKey: 'chequeId',
+    as: 'cheques'
+})
+Payment.belongsToMany(Purchase, {
+    through: Payment_Purchase,
+    foreignKey: 'paymentId',
+    otherKey: 'purchaseId',
+    as: 'purchases'
+})
+
 
 // Product Associations
 Product.belongsTo(Company, { foreignKey: 'manufacturerId', as: 'manufacturer' })
@@ -58,11 +94,45 @@ Product.hasMany(Order_Product, { foreignKey: 'productId', as: 'order_products' }
 Product.hasMany(Product_Price, { foreignKey: 'productId', as: 'product_prices' })
 Product.hasMany(Purchase_Product, { foreignKey: 'productId', as: 'purchase_products' })
 
+Product.belongsToMany(Order, {
+    through: Order_Product,
+    foreignKey: 'productId',
+    otherKey: 'orderId',
+    as: 'orders'
+})
+Product.belongsToMany(Purchase, {
+    through: Purchase_Product,
+    foreignKey: 'productId',
+    otherKey: 'purchaseId',
+    as: 'purchases'
+})
+
+
 // Purchase Associations
 Purchase.belongsTo(Company, { foreignKey: 'companyId', as: 'company' })
 Purchase.hasMany(Order_Purchase, { foreignKey: 'purchaseId', as: 'order_purchases' })
 Purchase.hasMany(Payment_Purchase, { foreignKey: 'purchaseId', as: 'payment_purchases' })
 Purchase.hasMany(Purchase_Product, { foreignKey: 'purchaseId', as: 'purchase_products' })
+
+Purchase.belongsToMany(Order, {
+    through: Order_Purchase,
+    foreignKey: 'purchaseId',
+    otherKey: 'orderId',
+    as: 'orders'
+})
+Purchase.belongsToMany(Payment, {
+    through: Payment_Purchase,
+    foreignKey: 'purchaseId',
+    otherKey: 'paymentId',
+    as: 'payments'
+})
+Purchase.belongsToMany(Product, {
+    through: Purchase_Product,
+    foreignKey: 'purchaseId',
+    otherKey: 'productId',
+    as: 'products'
+})
+
 
 // RefreshToken Associations
 RefreshToken.belongsTo(User, { foreignKey: 'userId', as: 'user' })
