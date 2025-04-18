@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { User } from '../../model/base/index.js'
+import { User } from '../../model/index.js'
 
 const handleNewUser = async (req, res) => {
     const { user, pwd } = req.body

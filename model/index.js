@@ -1,12 +1,12 @@
-import Cheque from "./Cheque.js"
-import Client from "./Client.js"
-import Company from "./Company.js"
-import Order from "./Order.js"
-import Payment from "./Payment.js"
-import Product from "./Product.js"
-import Purchase from "./Purchase.js"
-import RefreshToken from "./RefreshToken.js"
-import User from "./User.js"
+import Cheque from "./base/Cheque.js"
+import Client from "./base/Client.js"
+import Company from "./base/Company.js"
+import Order from "./base/Order.js"
+import Payment from "./base/Payment.js"
+import Product from "./base/Product.js"
+import Purchase from "./base/Purchase.js"
+import RefreshToken from "./base/RefreshToken.js"
+import User from "./base/User.js"
 
 // ---------- *._.* Table Associations *._.* ---------- \\
 

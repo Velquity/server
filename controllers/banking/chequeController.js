@@ -1,4 +1,4 @@
-import { Cheque } from '../../model/base/index.js'
+import { Cheque } from '../../model/index.js'
 
 const getAllCheques = async (req, res) => {
     const cheques = await Cheque.findAll()

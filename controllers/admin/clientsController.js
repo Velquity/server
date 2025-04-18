@@ -1,4 +1,4 @@
-import { Client } from '../../model/base/index.js'
+import { Client } from '../../model/index.js'
 
 const getAllClients = async (req, res) => {
     const clients = await Client.findAll()
