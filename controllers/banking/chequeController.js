@@ -1,10 +1,15 @@
 import { Cheque } from '../../model/index.js'
 
 const getAllCheques = async (req, res) => {
-    const cheques = await Cheque.findAll()
-    if (!cheques.length)
-        return res.status(204).json({ message: 'No cheques found.' })
-    res.json(cheques)
+    try {
+        const cheques = await Cheque.findAll()
+        if (!cheques.length)
+            return res.status(204).json({message: 'No cheques found.'})
+        res.status(200).json(cheques)
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
 }
 
 const createNewCheque = async (req, res) => {
@@ -30,16 +35,21 @@ const updateCheque = async (req, res) => {
     if (!id)
         return res.status(400).json({ message: 'ID parameter is required.' })
 
-    const cheque = await Cheque.findByPk(id)
-    if (!cheque)
-        return res.status(204).json({ message: `No cheque matches ID ${id}.` })
+    try {
+        const cheque = await Cheque.findByPk(id)
+        if (!cheque)
+            return res.status(204).json({message: `No cheque matches ID ${id}.`})
 
-    if (insta) cheque.insta = insta
-    if (company) cheque.company = company
-    if (amount) cheque.amount = amount
-    if (status) cheque.status = status
-    const result = await cheque.save()
-    res.status(201).json(result)
+        if (insta) cheque.insta = insta
+        if (company) cheque.company = company
+        if (amount) cheque.amount = amount
+        if (status) cheque.status = status
+        const result = await cheque.save()
+        res.status(201).json(result)
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
 }
 
 const deleteCheque = async (req, res) => {
@@ -47,12 +57,17 @@ const deleteCheque = async (req, res) => {
     if (!id)
         return res.status(400).json({ message: 'Cheque ID required.' })
 
-    const cheque = await Cheque.findByPk(id);
-    if (!cheque)
-        return res.status(204).json({ message: `No cheque matches ID ${id}.` })
+    try {
+        const cheque = await Cheque.findByPk(id);
+        if (!cheque)
+            return res.status(204).json({message: `No cheque matches ID ${id}.`})
 
-    await cheque.destroy()
-    res.status(201).json({ message: 'Cheque deleted' })
+        await cheque.destroy()
+        res.status(201).json({message: 'Cheque deleted'})
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
 }
 
 const getCheque = async (req, res) => {
@@ -60,11 +75,16 @@ const getCheque = async (req, res) => {
     if (!id)
         return res.status(400).json({ message: 'Cheque ID required.' })
 
-    const cheque = await Cheque.findByPk(id);
-    if (!cheque)
-        return res.status(204).json({ message: `No cheque matches ID ${id}.` })
+    try {
+        const cheque = await Cheque.findByPk(id);
+        if (!cheque)
+            return res.status(204).json({message: `No cheque matches ID ${id}.`})
 
-    res.status(201).json(cheque)
+        res.status(201).json(cheque)
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
 }
 
 export {

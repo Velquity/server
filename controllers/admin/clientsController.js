@@ -1,10 +1,15 @@
 import { Client } from '../../model/index.js'
 
 const getAllClients = async (req, res) => {
-    const clients = await Client.findAll()
-    if (!clients.length)
-        return res.status(204).json({ message: 'No clients found.' })
-    res.json(clients)
+    try {
+        const clients = await Client.findAll()
+        if (!clients.length)
+            return res.status(204).json({message: 'No clients found.'})
+        res.json(clients)
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
 }
 
 const createNewClient = async (req, res) => {
@@ -16,7 +21,7 @@ const createNewClient = async (req, res) => {
         const result = await Client.create({ firstname, lastname })
         res.status(201).json(result)
     } catch (err) {
-        res.status(500).json({ message: err.message })
+        return res.status(500).json({ message: err.message })
     }
 }
 
@@ -25,14 +30,19 @@ const updateClient = async (req, res) => {
     if (!id)
         return res.status(400).json({ message: 'ID parameter is required.' })
 
-    const client = await Client.findByPk(id)
-    if (!client)
-        return res.status(204).json({ message: `No employee matches ID ${id}.` })
+    try {
+        const client = await Client.findByPk(id)
+        if (!client)
+            return res.status(204).json({message: `No employee matches ID ${id}.`})
 
-    if (firstname) client.firstname = firstname
-    if (lastname) client.lastname = lastname
-    const result = await client.save()
-    res.status(201).json(result)
+        if (firstname) client.firstname = firstname
+        if (lastname) client.lastname = lastname
+        const result = await client.save()
+        res.status(201).json(result)
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
 }
 
 const deleteClient = async (req, res) => {
@@ -40,12 +50,17 @@ const deleteClient = async (req, res) => {
     if (!id)
         return res.status(400).json({ message: 'Client ID required.' })
 
-    const client = await Client.findByPk(id);
-    if (!client)
-        return res.status(204).json({ message: `No client matches ID ${id}.` })
+    try {
+        const client = await Client.findByPk(id);
+        if (!client)
+            return res.status(204).json({message: `No client matches ID ${id}.`})
 
-    await client.destroy()
-    res.status(201).json({ message: 'Client deleted' })
+        await client.destroy()
+        res.status(201).json({message: 'Client deleted'})
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
 }
 
 const getClient = async (req, res) => {
@@ -53,11 +68,16 @@ const getClient = async (req, res) => {
     if (!id)
         return res.status(400).json({ message: 'Client ID required.' })
 
-    const client = await Client.findByPk(id)
-    if (!client)
-        return res.status(204).json({ message: `No client matches ID ${id}.` })
+    try {
+        const client = await Client.findByPk(id)
+        if (!client)
+            return res.status(204).json({message: `No client matches ID ${id}.`})
 
-    res.status(201).json(client)
+        res.status(201).json(client)
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
 }
 
 export {

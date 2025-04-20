@@ -1,31 +1,48 @@
 import { User } from '../../model/index.js'
 
 const getAllUsers = async (req, res) => {
-    const users = await User.findAll()
-    if (!users)
-        return res.status(204).json({ 'message': 'No users found' })
-    res.json(users)
+    try {
+        const users = await User.findAll()
+        if (!users)
+            return res.status(204).json({'message': 'No users found'})
+        res.json(users)
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
 }
 
 const deleteUser = async (req, res) => {
     if (!req?.body?.id)
         return res.status(400).json({ "message": 'User ID required' })
-    const user = await User.findOne({ _id: req.body.id }).exec()
-    if (!user) {
-        return res.status(204).json({ 'message': `User ID ${req.body.id} not found` })
+
+    try {
+        const user = await User.findOne({_id: req.body.id}).exec()
+        if (!user) {
+            return res.status(204).json({'message': `User ID ${req.body.id} not found`})
+        }
+        const result = await user.deleteOne({_id: req.body.id})
+        res.json(result)
     }
-    const result = await user.deleteOne({ _id: req.body.id })
-    res.json(result)
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
 }
 
 const getUser = async (req, res) => {
     if (!req?.params?.id)
         return res.status(400).json({ "message": 'User ID required' })
-    const user = await User.findOne({ _id: req.params.id }).exec()
-    if (!user) {
-        return res.status(204).json({ 'message': `User ID ${req.params.id} not found` })
+
+    try {
+        const user = await User.findOne({_id: req.params.id}).exec()
+        if (!user) {
+            return res.status(204).json({'message': `User ID ${req.params.id} not found`})
+        }
+        res.json(user)
     }
-    res.json(user);
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
 }
 
 export { getAllUsers, deleteUser, getUser }
