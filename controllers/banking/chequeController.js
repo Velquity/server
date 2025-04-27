@@ -71,14 +71,13 @@ const deleteCheque = async (req, res) => {
 }
 
 const getCheque = async (req, res) => {
-    const { id } = req.params
-    if (!id)
+    if (!req?.params?.id)
         return res.status(400).json({ message: 'Cheque ID required.' })
 
     try {
-        const cheque = await Cheque.findByPk(id);
+        const cheque = await Cheque.findByPk(req.params.id);
         if (!cheque)
-            return res.status(204).json({message: `No cheque matches ID ${id}.`})
+            return res.status(204).json({message: `No cheque matches ID ${req.params.id}.`})
 
         res.status(201).json(cheque)
     }

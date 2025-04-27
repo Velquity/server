@@ -31,7 +31,6 @@ import Purchase_Product from "./mappings/Purchase_Product.js"
 
 // Cheque Associations
 Cheque.belongsTo(Company, { foreignKey: 'companyId', as: 'company' })
-Cheque.hasOne(Payment_Cheque, { foreignKey: 'chequeId', as: 'payment_cheque' })
 
 Cheque.belongsToMany(Payment, {
     through: Payment_Cheque,
@@ -52,8 +51,6 @@ Company.hasMany(Purchase, { foreignKey: 'companyId', as: 'purchases' })
 
 // Order Associations
 Order.belongsTo(Company, { foreignKey: 'companyId', as: 'company' })
-Order.hasMany(Order_Product, { foreignKey: 'orderId', as: 'order_products' })
-Order.hasMany(Order_Purchase, { foreignKey: 'orderId', as: 'order_purchases' })
 
 Order.belongsToMany(Product, {
     through: Order_Product,
@@ -70,9 +67,6 @@ Order.belongsToMany(Purchase, {
 
 
 // Payment Associations
-Payment.hasMany(Payment_Cheque, { foreignKey: 'paymentId', as: 'payment_cheques' })
-Payment.hasMany(Payment_Purchase, { foreignKey: 'paymentId', as: 'payment_purchases' })
-
 Payment.belongsToMany(Cheque, {
     through: Payment_Cheque,
     foreignKey: 'paymentId',
@@ -90,9 +84,6 @@ Payment.belongsToMany(Purchase, {
 // Product Associations
 Product.belongsTo(Company, { foreignKey: 'manufacturerId', as: 'manufacturer' })
 Product.belongsTo(Company, { foreignKey: 'distributorId', as: 'distributor' })
-Product.hasMany(Order_Product, { foreignKey: 'productId', as: 'order_products' })
-Product.hasMany(Product_Price, { foreignKey: 'productId', as: 'product_prices' })
-Product.hasMany(Purchase_Product, { foreignKey: 'productId', as: 'purchase_products' })
 
 Product.belongsToMany(Order, {
     through: Order_Product,
@@ -110,9 +101,6 @@ Product.belongsToMany(Purchase, {
 
 // Purchase Associations
 Purchase.belongsTo(Company, { foreignKey: 'companyId', as: 'company' })
-Purchase.hasMany(Order_Purchase, { foreignKey: 'purchaseId', as: 'order_purchases' })
-Purchase.hasMany(Payment_Purchase, { foreignKey: 'purchaseId', as: 'payment_purchases' })
-Purchase.hasMany(Purchase_Product, { foreignKey: 'purchaseId', as: 'purchase_products' })
 
 Purchase.belongsToMany(Order, {
     through: Order_Purchase,

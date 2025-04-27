@@ -34,7 +34,7 @@ const getUser = async (req, res) => {
         return res.status(400).json({ "message": 'User ID required' })
 
     try {
-        const user = await User.findOne({_id: req.params.id}).exec()
+        const user = await User.findByPk(req.params.id)
         if (!user) {
             return res.status(204).json({'message': `User ID ${req.params.id} not found`})
         }

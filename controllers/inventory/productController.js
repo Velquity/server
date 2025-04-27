@@ -23,7 +23,7 @@ const createNewProduct = async (req, res) => {
             manufacturerId: manufacturer,
             distributorId: distributor,
             category: category,
-            subcategory: subcategory,
+            subCategory: subcategory,
         })
         res.status(201).json(result)
     } catch (err) {
@@ -73,14 +73,13 @@ const deleteProduct = async (req, res) => {
 }
 
 const getProduct = async (req, res) => {
-    const {id} = req.params
-    if (!id)
-        return res.status(400).json({message: 'ID parameter is required.'})
+    if (!req?.params?.id)
+        return res.status(400).json({message: 'Product ID required.'})
 
     try {
-        const product = await Product.findByPk(id)
+        const product = await Product.findByPk(req.params.id)
         if (!product)
-            return res.status(204).json({message: `No Product matches ID ${id}.`})
+            return res.status(204).json({message: `No Product matches ID ${req.params.id}.`})
 
         res.status(201).json(product)
     }

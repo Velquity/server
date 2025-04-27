@@ -8,7 +8,7 @@ const Cheque = sequelize.define('Cheque', {
         allowNull: false
     },
     companyId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         default: 'Cash'
     },
