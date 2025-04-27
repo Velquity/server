@@ -3,6 +3,10 @@ import sequelize from '../../config/dbConn.js'
 import paymentStatus from '../../config/enum/paymentStatus.js'
 
 const Payment = sequelize.define('payment', {
+    companyId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     amount: {
         type: DataTypes.FLOAT,
         allowNull: false
