@@ -7,17 +7,25 @@ const Purchase = sequelize.define('Purchase', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    ref: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     amount: {
         type: DataTypes.FLOAT,
         allowNull: false
     },
     creditDays: {
         type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    deliveryDate: {
+        type: DataTypes.DATE,
         allowNull: false
     },
     dueDate: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: true
     },
     status: {
         type: DataTypes.ENUM(...purchaseStatus),

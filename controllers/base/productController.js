@@ -59,17 +59,16 @@ const updateProduct = async (req, res) => {
 }
 
 const deleteProduct = async (req, res) => {
-    const {id} = req.params
-    if (!id)
+    if (!req?.params?.id)
         return res.status(400).json({message: 'ID parameter is required.'})
 
     try {
-        const product = await Product.findByPk(id)
+        const product = await Product.findByPk(req.params.id)
         if (!product)
-            return res.status(204).json({message: `No Product matches ID ${id}.`})
+            return res.status(204).json({message: `No Product matches ID ${req.params.id}.`})
 
         await product.destroy()
-        res.status(201).json({ message: 'Cheque deleted' })
+        res.status(201).json({ message: 'Product deleted' })
     }
     catch (err) {
         res.status(500).json({ message: err.message })
