@@ -1,6 +1,4 @@
 import { Purchase } from '../../model/index.js'
-import purchase from "../../model/base/Purchase.js";
-import company from "../../model/base/Company.js";
 
 const getAllPurchase = async (req, res) => {
     try {
@@ -40,7 +38,7 @@ const createNewPurchase = async (req, res) => {
 }
 
 const updatePurchase = async (req, res) => {
-    const {id, ref, amount, creditDays, deliveryDate, dueDate, status} = req.body
+    const {id, company, ref, amount, creditDays, deliveryDate, dueDate, status} = req.body
     if (!id)
         return res.status(400).json({ message: 'ID parameter is required.' })
 
