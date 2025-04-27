@@ -1,8 +1,8 @@
 import express from 'express'
 
-import * as chequeController from '../controllers/banking/chequeController.js'
-import * as productController from '../controllers/inventory/productController.js'
-import * as companyController from '../controllers/purchase/companyController.js'
+import * as chequeController from '../controllers/base/chequeController.js'
+import * as productController from '../controllers/base/productController.js'
+import * as companyController from '../controllers/base/companyController.js'
 
 
 const router = express.Router()

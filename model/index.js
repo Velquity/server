@@ -9,7 +9,7 @@ import Purchase from "./base/Purchase.js"
 import RefreshToken from "./base/RefreshToken.js"
 import User from "./base/User.js"
 
-// Imports: inventory models
+// Imports: mapping models
 import BonusInventory from "./inventory/BonusInventory.js"
 import BrokenInventory from "./inventory/BrokenInventory.js"
 import ExpireInventory from "./inventory/ExpireInventory.js"
@@ -161,7 +161,7 @@ Order_Product.belongsTo(Product, { foreignKey: 'productId', as: 'product' })
 
 // Order_Purchase Associations
 Order_Purchase.belongsTo(Order, { foreignKey: 'orderId', as: 'order' })
-Order_Purchase.belongsTo(Purchase, { foreignKey: 'purchaseId', as: 'purchase' })
+Order_Purchase.belongsTo(Purchase, { foreignKey: 'purchaseId', as: 'inventory' })
 
 // Payment_Cheque Associations
 Payment_Cheque.belongsTo(Payment, { foreignKey: 'paymentId', as: 'payments' })
@@ -169,14 +169,14 @@ Payment_Cheque.belongsTo(Cheque, { foreignKey: 'chequeId', as: 'cheques' })
 
 // Payment_Purchase Associations
 Payment_Purchase.belongsTo(Payment, { foreignKey: 'paymentId', as: 'payments' })
-Payment_Purchase.belongsTo(Purchase, { foreignKey: 'purchaseId', as: 'purchase' })
+Payment_Purchase.belongsTo(Purchase, { foreignKey: 'purchaseId', as: 'inventory' })
 
 // Product_Price Associations
 Product_Price.belongsTo(Product, { foreignKey: 'productId', as: 'product' })
-Product_Price.hasMany(Purchase_Product, { foreignKey: 'priceVersion', as: 'purchase' })
+Product_Price.hasMany(Purchase_Product, { foreignKey: 'priceVersion', as: 'inventory' })
 
 // Purchase_Product Associations
-Purchase_Product.belongsTo(Purchase, { foreignKey: 'purchaseId', as: 'purchase' })
+Purchase_Product.belongsTo(Purchase, { foreignKey: 'purchaseId', as: 'inventory' })
 Purchase_Product.belongsTo(Product, { foreignKey: 'productId', as: 'product' })
 Purchase_Product.belongsTo(Product_Price, { foreignKey: 'priceVersion', as: 'prices' })
 
@@ -186,7 +186,7 @@ export {
     // base models
     Cheque, Client, Company, Order, Payment, Product, Purchase, RefreshToken, User,
 
-    // inventory models
+    // mapping models
     BonusInventory, BrokenInventory, ExpireInventory, PrimaryInventory, RefundInventory, ReturnInventory, SecondaryInventory,
 
     // mapping models

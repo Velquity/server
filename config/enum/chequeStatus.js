@@ -1,6 +1,6 @@
 const chequeStatus = [
     "scheduled",    // Cheque scheduled
-    "created",      // Newly created banking
+    "created",      // Newly created base
     "approved",     // Approved and Signed
     "received",     // Received for issuing
     "issued",       // Cheque borrowed by agent
