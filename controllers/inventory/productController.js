@@ -13,8 +13,8 @@ const getAllProducts = async (req, res) => {
 }
 
 const createNewProduct = async (req, res) => {
-    const {name, manufacturer, distributor, category, subcategory} = req.body
-    if (!name || !manufacturer || !distributor || !category || !subcategory)
+    const {name, manufacturer, distributor, category, subCategory} = req.body
+    if (!name || !manufacturer || !distributor || !category || !subCategory)
         return res.status(400).json({ message: 'All the fields are required.' })
 
     try {
@@ -23,7 +23,7 @@ const createNewProduct = async (req, res) => {
             manufacturerId: manufacturer,
             distributorId: distributor,
             category: category,
-            subCategory: subcategory,
+            subCategory: subCategory,
         })
         res.status(201).json(result)
     } catch (err) {
