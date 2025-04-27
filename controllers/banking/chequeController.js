@@ -71,7 +71,7 @@ const deleteCheque = async (req, res) => {
 }
 
 const getCheque = async (req, res) => {
-    const { id } = req.body
+    const { id } = req.params
     if (!id)
         return res.status(400).json({ message: 'Cheque ID required.' })
 
