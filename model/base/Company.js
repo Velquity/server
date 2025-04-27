@@ -4,6 +4,7 @@ import sequelize from '../../config/dbConn.js'
 const Company = sequelize.define('company', {
     name: {
         type: DataTypes.STRING,
+        unique: true,
         allowNull: false
     },
     address: {

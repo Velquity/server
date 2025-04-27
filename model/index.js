@@ -184,7 +184,7 @@ Purchase_Product.belongsTo(Product_Price, { foreignKey: 'priceVersion', as: 'pri
 // Export models
 export {
     // base models
-    Cheque, Client, Order, Payment, Product, Purchase, RefreshToken, User,
+    Cheque, Client, Company, Order, Payment, Product, Purchase, RefreshToken, User,
 
     // inventory models
     BonusInventory, BrokenInventory, ExpireInventory, PrimaryInventory, RefundInventory, ReturnInventory, SecondaryInventory,

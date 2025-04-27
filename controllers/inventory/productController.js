@@ -18,6 +18,10 @@ const createNewProduct = async (req, res) => {
         return res.status(400).json({ message: 'All the fields are required.' })
 
     try {
+        // Check for duplicates
+        const duplicate = await Product.findOne({ where: { name: name, category: category, subCategory: subCategory } })
+        if (duplicate) return res.status(409).json({ message: 'Conflict' })
+
         const result = await Product.create({
             name: name,
             manufacturerId: manufacturer,
