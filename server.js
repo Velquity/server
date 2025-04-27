@@ -14,7 +14,7 @@ import sequelize from './config/dbConn.js'
 import authRouter from './routes/authRouter.js'
 import clientsRoutes from './routes/clientsRouter.js'
 import usersRoutes from './routes/usersRouter.js'
-import chequeRouter from './routes/chequeRouter.js'
+import testRouter from './routes/testRouter.js'
 
 const app = express()
 const PORT = process.env.APP_PORT || 3500
@@ -57,7 +57,9 @@ app.use('/api/auth', authRouter)
 // app.use(verifyJWT)
 app.use('/clients', clientsRoutes)
 app.use('/users', usersRoutes)
-app.use('/cheque', chequeRouter)
+
+// Test Routes
+app.use('/v1', testRouter)
 
 
 
