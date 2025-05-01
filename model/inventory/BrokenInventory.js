@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
 import sequelize from '../../config/dbConn.js'
-import brokenReason from "../../config/enum/BrokenInventoryReason.js"
+import brokenReason from "../../config/enum/BrokenReason.js"
 
 const BrokenInventory = sequelize.define('broken_inventory', {
     productId: {
