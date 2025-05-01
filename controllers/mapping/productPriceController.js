@@ -28,6 +28,7 @@ const createNewProductPrice = async (req, res) => {
             retailPrice: retailPrice,
             isActive: isActive
         })
+        res.status(201).json(result)
     } catch (err) {
         res.status(501).json({ message: err.message })
     }

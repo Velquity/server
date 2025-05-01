@@ -28,6 +28,7 @@ const createNewOrderProduct = async (req, res) => {
             amount: amount,
             isActive: isActive
         })
+        res.status(201).json(result)
     } catch (err) {
         res.status(501).json({ message: err.message })
     }
