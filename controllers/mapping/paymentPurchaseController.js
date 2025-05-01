@@ -4,7 +4,7 @@ const getAllPaymentPurchase = async (req, res) => {
     try {
         const paymentPurchase = await Payment_Purchase.findAll()
         if (!paymentPurchase.length)
-            return res.status(204).json({ message: 'No Order Purchase found.' })
+            return res.status(204).json({ message: 'No Payment Purchase found.' })
         res.status(200).json({paymentPurchase})
     }
     catch (err) {
