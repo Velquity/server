@@ -19,6 +19,6 @@ const Product_Price = sequelize.define('product_price', {
         allowNull: false,
         default: true
     }
-})
+}, { timestamps: true })
 
 export default Product_Price

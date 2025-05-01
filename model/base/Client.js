@@ -10,6 +10,6 @@ const Client = sequelize.define('client', {
         type: DataTypes.STRING,
         allowNull: false
     }
-}, { timestamps: false })
+}, { timestamps: true })
 
 export default Client

@@ -15,6 +15,6 @@ const Payment_Purchase = sequelize.define('payment_purchase', {
         allowNull: false,
         default: true
     }
-})
+}, { timestamps: true })
 
 export default Payment_Purchase

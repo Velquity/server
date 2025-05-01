@@ -25,6 +25,6 @@ const User = sequelize.define('User', {
             attributes: {}
         }
     }
-})
+}, { timestamps: true })
 
 export default User

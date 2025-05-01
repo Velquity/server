@@ -32,6 +32,6 @@ const Purchase_Product = sequelize.define('purchase_product', {
         allowNull: false,
         default: true
     }
-})
+}, { timestamps: true })
 
 export default Purchase_Product
