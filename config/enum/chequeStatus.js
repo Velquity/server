@@ -8,7 +8,8 @@ const chequeStatus = [
     "cancelled",    // Cheque was not issued
     "correction",   // Cheque send again to fix errors
     "fixed",        // Cheque that fixed errors
-    "rejected"      // Cheque rejected by bank
+    "rejected",     // Cheque rejected by bank
+    "deleted"       // Cheque deleted by system
 ]
 
 export default chequeStatus

@@ -1,11 +1,29 @@
+import * as chequeService from '../../services/base/chequeService.js'
+
 import { Cheque } from '../../model/index.js'
 
 const getAllCheques = async (req, res) => {
     try {
-        const cheques = await Cheque.findAll()
+        const cheques = await chequeService.getAllCheques()
         if (!cheques.length)
             return res.status(204).json({message: 'No cheques found.'})
         res.status(200).json(cheques)
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+}
+
+const getOneCheque = async (req, res) => {
+    if (!req?.params?.id)
+        return res.status(400).json({ message: 'Cheque ID required.' })
+
+    try {
+        const cheque = await chequeService.getChequeByPk(req.params.id)
+        if (!cheque)
+            return res.status(204).json({message: `No cheque matches ID ${req.params.id}.`})
+
+        res.status(201).json(cheque)
     }
     catch (err) {
         return res.status(500).json({ message: err.message })
@@ -18,12 +36,7 @@ const createNewCheque = async (req, res) => {
         return res.status(400).json({ message: 'All the fields are required.' })
 
     try {
-        const result = await Cheque.create({
-            insta: insta,
-            company: company,
-            amount: amount,
-            status: status,
-        })
+        const result = await chequeService.createNewCheque(insta, company, amount, status)
         res.status(201).json(result)
     } catch (err) {
         res.status(500).json({ message: err.message })
@@ -36,15 +49,11 @@ const updateCheque = async (req, res) => {
         return res.status(400).json({ message: 'ID parameter is required.' })
 
     try {
-        const cheque = await Cheque.findByPk(id)
+        const cheque = await chequeService.getChequeByPk(id)
         if (!cheque)
             return res.status(204).json({message: `No cheque matches ID ${id}.`})
 
-        if (insta) cheque.insta = insta
-        if (company) cheque.company = company
-        if (amount) cheque.amount = amount
-        if (status) cheque.status = status
-        const result = await cheque.save()
+        const result = chequeService.updateCheque(cheque, insta, company, amount, status)
         res.status(201).json(result)
     }
     catch (err) {
@@ -58,38 +67,41 @@ const deleteCheque = async (req, res) => {
         return res.status(400).json({ message: 'Cheque ID required.' })
 
     try {
-        const cheque = await Cheque.findByPk(id);
+        const cheque = chequeService.getChequeByPk(id)
         if (!cheque)
             return res.status(204).json({message: `No cheque matches ID ${id}.`})
 
-        await cheque.destroy()
-        res.status(201).json({message: 'Cheque deleted'})
+        const result = chequeService.updateChequeStatus(cheque, 'deleted')
+        res.status(201).json(result)
     }
     catch (err) {
         return res.status(500).json({ message: err.message })
     }
 }
 
-const getCheque = async (req, res) => {
-    if (!req?.params?.id)
-        return res.status(400).json({ message: 'Cheque ID required.' })
+const changeChequeStatus = async (req, res) => {
+    const { id, status } = req.body
+    if (!id || !status)
+        return res.status(400).json({ message: 'All the fields are required.' })
 
     try {
-        const cheque = await Cheque.findByPk(req.params.id);
+        const cheque = chequeService.getChequeByPk(id)
         if (!cheque)
             return res.status(204).json({message: `No cheque matches ID ${req.params.id}.`})
 
-        res.status(201).json(cheque)
-    }
-    catch (err) {
+        const result = chequeService.updateChequeStatus(cheque, status)
+        res.status(201).json(result)
+
+    } catch (err) {
         return res.status(500).json({ message: err.message })
     }
 }
 
 export {
     getAllCheques,
+    getOneCheque,
     createNewCheque,
     updateCheque,
     deleteCheque,
-    getCheque
+    changeChequeStatus
 }
