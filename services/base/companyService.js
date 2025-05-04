@@ -24,7 +24,7 @@ const createNewCompany = async (name, address, email, creditDays, primaryContact
     })
 }
 
-const updateCheque = async (company, name, address, email, creditDays, primaryContact, secondaryContact, isAvailable) => {
+const updateCompany = async (company, name, address, email, creditDays, primaryContact, secondaryContact, isAvailable) => {
     if (name) company.name = name
     if (address) company.address = address
     if (email) company.email = email
@@ -52,6 +52,6 @@ export {
     getCompanyByPk,
     findDuplicate,
     createNewCompany,
-    updateCheque,
+    updateCompany,
     changeCompanyStatus,
 }

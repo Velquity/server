@@ -25,6 +25,11 @@ const Product = sequelize.define('Product', {
         type: DataTypes.ENUM(...productSubCategory),
         allowNull: false,
         default: 'other'
+    },
+    isAvailable: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        default: true
     }
 }, { timestamps: true })
 

@@ -55,7 +55,7 @@ const updateCompany = async (req, res) => {
         if (!company)
             return res.status(204).json({ message: `No Company matches ID ${id}.` })
 
-        const result = await companyService.updateCheque(company, name, address, email, creditDays, primaryContact, secondaryContact, isAvailable)
+        const result = await companyService.updateCompany(company, name, address, email, creditDays, primaryContact, secondaryContact, isAvailable)
         res.status(201).json(result)
     }
     catch (err) {
