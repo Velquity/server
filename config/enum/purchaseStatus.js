@@ -4,7 +4,8 @@ const purchaseStatus = [
     "voucher",
     "paid",
     "lost",
-    "returned"
+    "returned",
+    "deleted"
 ]
 
 export default purchaseStatus
