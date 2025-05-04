@@ -13,7 +13,7 @@ router.route('/cheque')
     .post(chequeController.createNewCheque)
     .put(chequeController.updateCheque)
 router.route('/cheque/:id')
-    .get(chequeController.getCheque)
+    .get(chequeController.getOneCheque)
     .delete(chequeController.deleteCheque)
 
 // Product Routes
@@ -22,7 +22,7 @@ router.route('/product')
     .post(productController.createNewProduct)
     .put(productController.updateProduct)
 router.route('/product/:id')
-    .get(productController.getProduct)
+    .get(productController.getOneProduct)
     .delete(productController.deleteProduct)
 
 // Company Routes
@@ -31,7 +31,7 @@ router.route('/company')
     .post(companyController.createNewCompany)
     .put(companyController.updateCompany)
 router.route('/company/:id')
-    .get(companyController.getCompany)
+    .get(companyController.getOneCompany)
     .delete(companyController.deleteCompany)
 
 
