@@ -6,7 +6,8 @@ const paymentStatus = [
     "incorrect",
     "fixed",
     "collected",
-    "realized"
+    "realized",
+    "deleted"
 ]
 
 export default paymentStatus
