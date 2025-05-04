@@ -1,7 +1,15 @@
-import { Cheque } from '../../model/index.js'
+import {Cheque, Company} from '../../model/index.js'
 
 const getAllCheques = async () => {
     return await Cheque.findAll()
+}
+
+const getChequeByPk = async (id) => {
+    return await Cheque.findByPk(id)
+}
+
+const findDuplicate = async (insta) => {
+    return await Company.findOne({ where: { insta: insta } })
 }
 
 const createNewCheque = async (insta, company, amount, status) => {
@@ -22,10 +30,6 @@ const updateCheque = async (cheque, insta, company, amount, status) => {
     return await cheque.save()
 }
 
-const getChequeByPk = async (id) => {
-    return await Cheque.findByPk(id)
-}
-
 const updateChequeStatus = async (cheque, status) => {
     const chequeInsta = cheque.insta
     const prevStatus = cheque.status
@@ -40,8 +44,9 @@ const updateChequeStatus = async (cheque, status) => {
 
 export {
     getAllCheques,
+    getChequeByPk,
+    findDuplicate,
     createNewCheque,
     updateCheque,
-    getChequeByPk,
     updateChequeStatus
 }

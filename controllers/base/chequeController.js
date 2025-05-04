@@ -1,6 +1,7 @@
 import * as chequeService from '../../services/base/chequeService.js'
 
 import { Cheque } from '../../model/index.js'
+import * as companyService from "../../services/base/companyService.js";
 
 const getAllCheques = async (req, res) => {
     try {
@@ -36,6 +37,9 @@ const createNewCheque = async (req, res) => {
         return res.status(400).json({ message: 'All the fields are required.' })
 
     try {
+        const duplicate = await chequeService.findDuplicate(name)
+        if (duplicate) return res.status(409).json({ message: 'Conflict' })
+
         const result = await chequeService.createNewCheque(insta, company, amount, status)
         res.status(201).json(result)
     } catch (err) {
