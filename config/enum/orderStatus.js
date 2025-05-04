@@ -3,7 +3,8 @@ const orderStatus = [
     "approved",
     "declined",
     "send",
-    "cancelled"
+    "cancelled",
+    "deleted"
 ]
 
 export default orderStatus

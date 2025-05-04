@@ -25,10 +25,13 @@ const updateOrder = async (order, company, amount, expectedDate, status) => {
     return await order.save()
 }
 
-const deleteOrder = async (order) => {
-    const result = await order.destroy()
+const updateOrderStatus = async (order, status) => {
+    const prevStatus = order.status
+
+    order.status = status
+    const result = await order.save()
     return ({
-        message: 'Order deleted',
+        message: `Order status changed from ${prevStatus} to ${status}`,
         result
     })
 }
@@ -38,5 +41,5 @@ export {
     getOrderByPk,
     createNewOrder,
     updateOrder,
-    deleteOrder,
+    updateOrderStatus,
 }

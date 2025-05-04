@@ -68,7 +68,7 @@ const deleteOrder = async (req, res) => {
         if (!order)
             return res.status(204).json({message: `No Order matches ID ${req.params.id}.`})
 
-        const result = await orderService.deleteOrder(order)
+        const result = await orderService.updateOrderStatus(order, 'deleted')
         res.status(201).json(result)
     }
     catch (err) {
