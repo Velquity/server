@@ -1,8 +1,8 @@
-import { Order } from '../../model/index.js'
+import * as orderService from '../../services/base/orderService.js'
 
-const getAllOrder = async (req, res) => {
+const getAllOrders = async (req, res) => {
     try {
-        const orders = await Order.findAll()
+        const orders = await orderService.getAllOrders()
         if (!orders.length)
             return res.status(204).json({message: 'No Orders found.'})
         res.status(200).json(orders)
@@ -12,18 +12,29 @@ const getAllOrder = async (req, res) => {
     }
 }
 
+const getOneOrder = async (req, res) => {
+    if (!req?.params?.id)
+        return res.status(400).json({message: 'Order ID required.'})
+
+    try {
+        const order = await orderService.getOrderByPk(req.params.id)
+        if (!order)
+            return res.status(204).json({message: `No Order matches ID ${req.params.id}.`})
+
+        res.status(201).json(order)
+    }
+    catch (err) {
+        res.status(500).json({ message: err.message })
+    }
+}
+
 const createNewOrder = async (req, res) => {
     const {company, amount, expectedDate, status} = req.body
     if (!company || !amount || !expectedDate || !status)
         return res.status(400).json({ message: 'All the fields are required.' })
 
     try {
-        const result = await Order.create({
-            company: company,
-            amount: amount,
-            expectedDate: expectedDate,
-            status: status
-        })
+        const result = await orderService.createNewOrder()
         res.status(201).json(result)
     } catch (err) {
         res.status(501).json({ message: err.message })
@@ -31,20 +42,16 @@ const createNewOrder = async (req, res) => {
 }
 
 const updateOrder = async (req, res) => {
-    const {id,company, amount, expectedDate, status} = req.body
+    const {id, company, amount, expectedDate, status} = req.body
     if (!id)
         return res.status(400).json({ message: 'ID parameter is required.' })
 
     try {
-        const order = await Order.findByPk(id)
+        const order = await orderService.getOrderByPk(id)
         if (!order)
             return res.status(204).json({ message: `No Order matches ID ${id}.` })
 
-        if (company) order.companyId = company
-        if (amount) order.amount = amount
-        if (expectedDate) order.expectedDate = expectedDate
-        if (status) order.status = status
-        const result = await order.save()
+        const result = orderService.updateOrder(order, company, amount, expectedDate, status)
         res.status(201).json(result)
     }
     catch (err) {
@@ -57,28 +64,12 @@ const deleteOrder = async (req, res) => {
         return res.status(400).json({message: 'ID parameter is required.'})
 
     try {
-        const order = await Order.findByPk(req.params.id)
+        const order = await orderService.getOrderByPk(req.params.id)
         if (!order)
             return res.status(204).json({message: `No Order matches ID ${req.params.id}.`})
 
-        await order.destroy()
-        res.status(201).json({ message: 'Order deleted' })
-    }
-    catch (err) {
-        res.status(500).json({ message: err.message })
-    }
-}
-
-const getOrder = async (req, res) => {
-    if (!req?.params?.id)
-        return res.status(400).json({message: 'Order ID required.'})
-
-    try {
-        const order = await Order.findByPk(req.params.id)
-        if (!order)
-            return res.status(204).json({message: `No Order matches ID ${req.params.id}.`})
-
-        res.status(201).json(order)
+        const result = await orderService.deleteOrder(order)
+        res.status(201).json(result)
     }
     catch (err) {
         res.status(500).json({ message: err.message })
@@ -86,9 +77,9 @@ const getOrder = async (req, res) => {
 }
 
 export {
-    getAllOrder,
+    getAllOrders,
+    getOneOrder,
     createNewOrder,
     updateOrder,
     deleteOrder,
-    getOrder
 }
